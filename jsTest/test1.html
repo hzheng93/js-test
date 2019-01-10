@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<input type="button" onclick="warnMessage()" value="warning" />
+
+<input type="button" onclick="confirm_button()" value="y/n" />
+
+</body>
+
+<script>
+    /*document.write("hello");
+    document.write("<h1> hzh </h1>");*/
+
+    //var timeNow = new Date();
+    //Math.random()返回值>0,<1
+    var hour = Math.random()*20;
+
+    console.log(hour);
+
+    if (hour > 12) {
+        document.write("end");
+    }else if (hour < 10) {
+        document.write("waiting a moment");
+    }else {
+        document.write("time now");
+    }
+
+    function warnMessage() {
+        alert("warning !!!" + '\n' + "转行" + '\t' + "table空格");
+    }
+
+    function confirm_button() {
+        var confirmValue = confirm("are you sure ?");
+        if (confirmValue) {
+            alert("ok");
+        }else {
+            alert("see you later");
+        }
+    }
+
+    function message() {
+        var name = "hzh";
+        alert(name);
+        name = "zhz";
+        alert(name);
+    }
+</script>
+</html>
