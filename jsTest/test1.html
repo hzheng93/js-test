@@ -4,17 +4,33 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
 
 <input type="button" onclick="warnMessage()" value="warning" />
 
-<input type="button" onclick="confirm_button()" value="y/n" />
+<input type="button" onclick="confirm_button()" value="confirm" />
+
+<input type="button" onclick="prompt_button()" value="prompt" />
+
+<input type="button" onclick="exception_button()" value="exception" />
+
+<input type="button" onclick="throw_button()" value="throw" />
+
+<input type="button" onclick="time_button()" value="time" />
+
+<br />
+<input type="button" value="开始计时！" onClick="timedCount()">
+<input type="text" id="txt">
+<input type="button" value="停止计时！" onClick="stopCount()">
+<br />
 
 </body>
 
 <script>
     /*document.write("hello");
     document.write("<h1> hzh </h1>");*/
+
+    document.write(message(5, 6));
+    document.write("<br />");
 
     //var timeNow = new Date();
     //Math.random()返回值>0,<1
@@ -43,11 +59,110 @@
         }
     }
 
-    function message() {
-        var name = "hzh";
-        alert(name);
-        name = "zhz";
-        alert(name);
+    function prompt_button() {
+        var promptValue = prompt("name");
+        if (promptValue != null && promptValue != "") {
+            alert(promptValue + ": ok!");
+        }
     }
+
+    function message(a , b) {
+        return a + b;
+    }
+
+    document.write("<br />");
+
+    for (var i = 1; i < 6; i++) {
+        if (i == 3) {
+            continue;
+        }
+        document.write("<h" + i + ">标题" + "</h" + i + ">");
+    }
+
+    function exception_button() {
+        var errText = "";
+        try {
+            //alertaa();
+        }catch (e) {
+            errText = "error !!!"
+            console.log(e);
+            if (!confirm(errText)) {
+                document.location.href="www.baidu.com"
+            }
+        }
+    }
+
+    function throw_button() {
+        var num = prompt("输入0-10数字");
+        try {
+            if (isNaN(num)) {
+                throw "err1";
+            }else if (num < 0) {
+                throw  "err2";
+            }else if (num >10) {
+                throw  "err3";
+            }else {
+                alert("数字：" + num);
+            }
+        }catch (e) {
+            if (e == "err1") {
+                alert("类型有误");
+            }else if (e == "err2") {
+                alert("数字太小");
+            }else if (e == "err3") {
+                alert("数字太大");
+            }
+        }
+    }
+    
+    function time_button() {
+        var num = prompt("设置几秒超时?");
+
+        var a = setTimeout("alert('time out')", num * 1000);
+    }
+
+    var c = 0
+    var t
+    function timedCount()
+    {
+        document.getElementById("txt").value = c;
+        c = c + 1
+        t = setTimeout("timedCount()",1000)
+    }
+
+    function stopCount() {
+        c = 0
+        document.getElementById("txt").value = c;
+        clearTimeout(t);
+    }
+    
+    var PersonInfo = function(personName, personAge) {
+        this.personName = personName;
+        this.personAge = personAge;
+    }
+    hzheng = new PersonInfo("hzh", "25");
+
+    document.write("姓名：" + hzheng.personName + ", 年龄：" + hzheng.personAge + "<br />");
+
+    var nameString = "He name is huZhiHeng";
+    document.write(nameString + "<br />")
+    document.write("长度：" + nameString.length + "<br />");
+    document.write("H，首次出现在第：" + nameString.indexOf("H") + "个" + "<br />");
+    document.write("x，首次出现在第：" + nameString.indexOf("x") + "个" + "<br />");
+    document.write("空格，首次出现在第：" + nameString.indexOf(" ") + "个" + "<br />");
+    if (nameString.match("name")) {
+        document.write("找到name" + "<br />");
+    }else {
+        document.write("没找到name" + "<br />");
+    }
+    if (nameString.match("xxx")) {
+        document.write("找到xxx" + "<br />");
+    }else {
+        document.write("没找到xxx" + "<br />");
+    }
+    document.write(nameString.replace(/He/,"She") + "<br />")
+
+
+
 </script>
 </html>
